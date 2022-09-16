@@ -1,4 +1,4 @@
-const readBody = (res, cb) => {
+const getBody = (res, cb) => {
     let data = Buffer.from([]);
     res.onData((ab, isLast) => {
         let chunk = Buffer.from(ab);
@@ -13,4 +13,4 @@ const readBody = (res, cb) => {
     });
 };
 
-module.exports = readBody;
+module.exports = getBody;

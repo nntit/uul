@@ -6,7 +6,7 @@ const staticFiles = require('./src/staticFiles');
 
 const App = new uul({});
 const uws = App.uws;
-
+uws
 uws.get('/*', (res, req) => {
     /* It does Http as well */
     res.writeStatus('200 OK').writeHeader('IsExample', 'Yes').end('Hello there!');
