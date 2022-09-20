@@ -1,7 +1,11 @@
 const { graphql, parse, Source, validate } = require('graphql');
 const ejs = require('ejs');
+const path = require('path');
+const { loadFilesSync } = require('@graphql-tools/load-files');
+const { mergeTypeDefs, mergeResolvers } = require('@graphql-tools/merge');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 
-const readBody = require('../readBody');
+const getBody = require('../getBody');
 
 const depthLimitQuery = require('./libs/depthLimitQuery');
 const disableIntrospection = require('./libs/disableIntrospection');
@@ -68,17 +72,14 @@ module.exports = (App, url, endpoint, options) => {
     App.post(url, (res, req) => {
         res.writeHeader('Access-Control-Allow-Origin', '*');
         typeInfo = req.getHeader('content-type');
-        var token = req.getHeader('authorization');
-        if (token === '') {
-            token = req.getHeader('token');
-        }
         var context = {};
-        context.token = token;
-        readBody(res, (correct, data) => {
+        context.res = res;
+        context.req = req;
+        getBody(res, (correct, data) => {
             JSONdata = correct ? tryParseJSON(data) : 'error parse json';
             if (correct && typeInfo == 'application/json' && JSONdata) {
                 try {
-                    var validateRes = validate(schema, createDocument(JSONdata.query), variableValues);
+                    var validateRes = validate(optionDefault.schema, createDocument(JSONdata.query), variableValues);
                     if (validateRes == 0) {
                         graphql({
                             schema: optionDefault.schema,

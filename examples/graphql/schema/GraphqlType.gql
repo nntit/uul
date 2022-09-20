@@ -1,0 +1,14 @@
+scalar Date
+scalar JSON
+scalar JSONObject
+
+"""
+`select`
+"""
+input select {
+    skip: Int
+    limit: Int
+    sort: JSON
+    find: String
+    search: String
+}

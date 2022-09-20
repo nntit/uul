@@ -1,0 +1,23 @@
+type User {
+    _id: ID
+    username: String
+    name: String
+}
+
+type Users {
+    data: [User]
+    total: Int
+}
+
+type Query {
+    Users(select: select, _id: ID, name: String, username: String): Users
+    User(_id: ID!): User
+}
+
+type Mutation {
+    createUser(
+        username: String!
+        password: String!
+        name: String!
+    ): User
+}

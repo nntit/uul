@@ -1,4 +1,5 @@
 module.exports = {
+    uws: require('uWebSockets.js'),
     graphql: require('./src/graphql'),
     renderView: require('./src/renderView'),
     getBody: require('./src/getBody'),
