@@ -1,4 +1,5 @@
 module.exports = {
+    graphql: require('./src/graphql'),
     renderView: require('./src/renderView'),
     getBody: require('./src/getBody'),
     getCookie: require('./src/getCookie'),
@@ -7,5 +8,3 @@ module.exports = {
     redirects: require('./src/redirects'),
     getCookie: require('./src/getCookie'),
 };
-
-module.exports = uul;
