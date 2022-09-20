@@ -1,43 +1,48 @@
-
-
-    <!DOCTYPE html>
-    <html>
-     
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset=utf-8 />
-        <meta name="viewport"
-            content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-        <title>GraphQL Playground</title>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/graphql-playground-react@1.7.28/build/static/css/index.css" />
-        <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/graphql-playground-react@1.7.28/build/favicon.png" />
-        <script src="//cdn.jsdelivr.net/npm/graphql-playground-react@1.7.28/build/static/js/middleware.js"></script>
-    </head>
-     
-    <body>
-        <style type="text/css">
-            html {
-                font-family: "Open Sans", sans-serif;
+        <style>
+            body {
+                height: 100%;
+                margin: 0;
+                width: 100%;
                 overflow: hidden;
             }
-     
-            body {
-                margin: 0;
-                background: #172a3a;
+
+            #graphiql {
+                height: 100vh;
             }
         </style>
-        <div id="root">
-        <script type="text/javascript">
-            window.addEventListener('load', function (event) {
-                const root = document.getElementById('root');
-                GraphQLPlayground.init(root, {
-                    endpoint: '<%= endpoint %>', settings: {
-                        'tracing.tracingSupported': false,
-                        'tracing.hideTracingResponse': true
-                    }
-                })
-            })
+        <script
+            crossorigin
+            src="https://unpkg.com/react/umd/react.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/graphiql/graphiql.min.css"
+        />
+    </head>
+
+    <body>
+        <div id="graphiql">Loading...</div>
+        <script
+            src="https://unpkg.com/graphiql/graphiql.min.js"
+            type="application/javascript"
+        ></script>
+        <script>
+            ReactDOM.render(
+                React.createElement(GraphiQL, {
+                    fetcher: GraphiQL.createFetcher({
+                        url: "<%= endpoint %>",
+                    }),
+                    defaultEditorToolsVisibility: true,
+                }),
+                document.getElementById("graphiql")
+            );
         </script>
     </body>
-     
-    </html>
-
+</html>
