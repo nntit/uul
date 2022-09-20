@@ -20,7 +20,12 @@ module.exports = (App, url, endpoint, options) => {
         Object.assign(optionDefault, options);
     }
 
-    if (schema == null && typeResolver == null && folderFilesTypeDefs != null && folderFilesResolvers != null) {
+    if (
+        optionDefault.schema == null &&
+        optionDefault.typeResolver == null &&
+        optionDefault.folderFilesTypeDefs != null &&
+        optionDefault.folderFilesResolvers != null
+    ) {
         const typeDefs = mergeTypeDefs(
             loadFilesSync(path.join(__dirname, 'graphql/schema'), {
                 recursive: false,
