@@ -31,13 +31,13 @@ module.exports = (App, url, endpoint, options) => {
         optionDefault.folderFilesResolvers != null
     ) {
         const typeDefs = mergeTypeDefs(
-            loadFilesSync(path.join(__dirname, 'graphql/schema'), {
+            loadFilesSync(optionDefault.folderFilesTypeDefs, {
                 recursive: false,
                 extensions: ['gql'],
             })
         );
         const resolvers = mergeResolvers(
-            loadFilesSync(path.join(__dirname, 'graphql/schema'), {
+            loadFilesSync(optionDefault.folderFilesResolvers, {
                 recursive: false,
                 extensions: ['js'],
             })
