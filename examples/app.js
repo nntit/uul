@@ -14,22 +14,34 @@ uul.graphql(App, '/graphql', '/graphql', {
 });
 
 App.get('/*', (res, req) => {
-    /* It does Http as well */
-    res.writeStatus('200 OK').writeHeader('IsExample', 'Yes').end('Hello there!');
+    const uuid = crypto.randomUUID({ disableEntropyCache: true });
+    res.writeHeader('Set-Cookie', '_token=' + uuid + '; SameSite=Strict; HttpOnly')
+    uul.renderView(res, path.join(__dirname, 'view/index.ejs'), {})
 });
 App.ws('/*', {
     message: (ws, message, isBinary) => {
         let ok = ws.send(message, isBinary, true);
     },
+    upgrade(res, req, context) {
+        uid = uul.getCookie(req, "_token");
+        
+        // authorization
+        if (false) { return res.writeStatus('401').end(); }
+        res.upgrade({
+            uid: uid
+        },
+            req.getHeader('sec-websocket-key'),
+            req.getHeader('sec-websocket-protocol'),
+            req.getHeader('sec-websocket-extensions'),
+            context);
+    },
     open: (ws) => {
-        const uuid = crypto.randomUUID({ disableEntropyCache: true });
-        ws.id = uuid;
-        wsMap.set(uuid, ws)
-        console.log(new Date(), 'open_connect', uuid, wsMap.size);
+        wsMap.set(ws.uid, ws)
+        console.log(new Date(), 'open_connect', ws.uid, wsMap.size);
     },
     close: (ws, code, message) => {
-        wsMap.delete(ws.id)
-        console.log(new Date(), 'close_connect', code, ws.id, wsMap.size);
+        wsMap.delete(ws.uid)
+        console.log(new Date(), 'close_connect', code, ws.uid, wsMap.size);
     }
 })
 App.listen(9001, (listenSocket) => {

@@ -7,5 +7,5 @@ module.exports = {
     sendFile: require('./src/sendFile'),
     staticFiles: require('./src/staticFiles'),
     redirects: require('./src/redirects'),
-    getCookie: require('./src/getCookie'),
+    setCookie: require('./src/setCookie'),
 };
