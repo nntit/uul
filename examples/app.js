@@ -14,6 +14,12 @@ App.get('/*', (res, req) => {
     /* It does Http as well */
     res.writeStatus('200 OK').writeHeader('IsExample', 'Yes').end('Hello there!');
 });
+App.ws('/*', {
+    message: (ws, message, isBinary) => {
+        let ok = ws.send(message, isBinary, true);
+    }
+
+})
 App.listen(9001, (listenSocket) => {
     if (listenSocket) {
         console.log('Listening to port 9001');

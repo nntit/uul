@@ -1,17 +1,15 @@
 const { composeResolvers } = require('@graphql-tools/resolvers-composition');
-const models = require('../../models');
-const auth = require('../libs/auth');
-const { selects } = require('../libs/selectGraphql');
+// const { selects } = require('../libs/selectGraphql');
 
 const resolvers = {
     Query: {
         Users: async (parent, args, context) => {
-            return selects({
-                model_name: 'User',
-                parent: parent,
-                args: args,
-                context: context,
-            });
+            // return selects({
+            //     model_name: 'User',
+            //     parent: parent,
+            //     args: args,
+            //     context: context,
+            // });
         },
         User: async (parent, args, context) => {
             var data = await models.Users.findOne(args).lean();
