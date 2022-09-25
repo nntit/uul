@@ -74,9 +74,6 @@ module.exports = {
                     return str;
                 },
             });
-            if (!HasKeyObj(find, find_field_allow)) {
-                throw new Error('You are find field not allow');
-            }
         }
 
         var query = model.find({

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Format find</title>
+        <style>
+            body {
+                height: calc(100vh - 16px);
+                display: flex;
+                justify-content: space-between;
+            }
+            #jsoneditor {
+                flex-basis: calc(50% - 4px);
+            }
+            #qstext {
+                flex-basis: calc(50% - 4px);
+                border: 1px solid #d7d7d7;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="jsoneditor"></div>
+        <div id="qstext"></div>
+
+        <script type="module">
+            import { JSONEditor } from 'https://cdn.jsdelivr.net/npm/vanilla-jsoneditor/index.min.js';
+
+            // create the editor
+            const editorjson = new JSONEditor({
+                target: document.getElementById('jsoneditor'),
+                props: {
+                    onChange: (updatedContent) => {
+                        fetch('/graphql/qs', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: updatedContent.text,
+                        }).then((v) => {
+                            console.log(v);
+                        });
+                    },
+                },
+            });
+
+            // get json
+            //const content = editor.get();
+        </script>
+    </body>
+</html>
