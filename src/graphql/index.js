@@ -55,7 +55,7 @@ module.exports = (App, url, endpoint, options) => {
 
     if (!optionDefault.production) {
         App.get(url, (res, req) => {
-            ejs.renderFile(__dirname + '/playground.ejs', { endpoint: endpoint }, (err, str) => {
+            ejs.renderFile(__dirname + '/graphiql.ejs', { endpoint: endpoint }, (err, str) => {
                 res.end(str);
             });
         });

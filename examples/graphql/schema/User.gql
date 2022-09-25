@@ -2,6 +2,7 @@ type User {
     _id: ID
     username: String
     name: String
+    app_id: ID
 }
 
 type Users {
@@ -15,9 +16,5 @@ type Query {
 }
 
 type Mutation {
-    createUser(
-        username: String!
-        password: String!
-        name: String!
-    ): User
+    createUser(username: String!, password: String!, name: String): User
 }

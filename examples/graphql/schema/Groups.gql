@@ -1,0 +1,17 @@
+type Group {
+    _id: ID
+    name: String
+}
+
+type Groups {
+    data: [Group]
+    total: Int
+}
+
+type Query {
+    Groups(select: select, _id: ID, name: String): Groups
+}
+
+type Mutation {
+    Group_create(name: String!): User
+}

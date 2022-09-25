@@ -4,16 +4,12 @@ const { selects } = require('../libs/selectGraphql');
 
 const resolvers = {
     Query: {
-        Users: async (parent, args, context) => {
+        Groups: async (parent, args, context) => {
             return selects(model, parent, args, context);
-        },
-        User: async (parent, args, context) => {
-            var data = await model.findOne(args).lean();
-            return data;
         },
     },
     Mutation: {
-        createUser: async (parent, args, context) => {
+        Group_create: async (parent, args, context) => {
             var data = new model(args);
             await data.save();
             return data;

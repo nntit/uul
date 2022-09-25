@@ -1,0 +1,50 @@
+type App {
+    _id: ID
+    name: String
+    info: [App_info]
+    input: [App_input]
+}
+
+type App_info {
+    key: String
+    name: String
+    value: String
+}
+
+input App_info_input {
+    key: String
+    name: String
+    value: String
+}
+
+type App_input {
+    key: String
+    name: String
+    type: String
+    value: String
+}
+input App_input_input {
+    key: String
+    name: String
+    type: String
+    value: String
+}
+
+type Apps {
+    data: [App]
+    total: Int
+}
+
+type Query {
+    Apps(select: select, _id: ID): Apps
+}
+
+type Mutation {
+    App_create(
+        name: String
+        info: [App_info_input]
+        input: [App_input_input]
+    ): App
+    App_update(name: String, info: [App_info_input], input: [App_input_input]): App
+    App_delete(_id: ID!): JSON
+}
