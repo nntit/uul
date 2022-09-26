@@ -19,6 +19,7 @@
                 border: 1px solid #d7d7d7;
                 width: calc(100% - 6px);
                 height: calc(100% - 6px);
+                font-size: 21px;
                 resize: none;
                 margin: 0;
             }
@@ -37,16 +38,24 @@
             const editorjson = new JSONEditor({
                 target: document.getElementById('jsoneditor'),
                 props: {
-                    onChange: (updatedContent) => {
-                        fetch('/graphql/qs', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: updatedContent.text,
-                        }).then((v) => {
-                            document.getElementById('qstextarea').value = v;
-                        });
+                    onChange: (updatedContent, previousContent, { contentErrors, patchResult }) => {
+                        console.log('onChange', { updatedContent, previousContent, contentErrors, patchResult });
+                        try {
+                            fetch('/graphql/qs', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: updatedContent.text ? updatedContent.text : JSON.stringify(updatedContent.json),
+                            })
+                                .then((response) => response.text())
+                                .then((v) => {
+                                    console.log(v);
+                                    document.getElementById('qstextarea').value = v;
+                                });
+                        } catch (error) {
+                            document.getElementById('qstextarea').value = error;
+                        }
                     },
                 },
             });
