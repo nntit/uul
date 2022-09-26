@@ -14,13 +14,21 @@
             }
             #qstext {
                 flex-basis: calc(50% - 4px);
+            }
+            #qstext textarea {
                 border: 1px solid #d7d7d7;
+                width: calc(100% - 6px);
+                height: calc(100% - 6px);
+                resize: none;
+                margin: 0;
             }
         </style>
     </head>
     <body>
         <div id="jsoneditor"></div>
-        <div id="qstext"></div>
+        <div id="qstext">
+            <textarea id="qstextarea"></textarea>
+        </div>
 
         <script type="module">
             import { JSONEditor } from 'https://cdn.jsdelivr.net/npm/vanilla-jsoneditor/index.min.js';
@@ -37,14 +45,11 @@
                             },
                             body: updatedContent.text,
                         }).then((v) => {
-                            console.log(v);
+                            document.getElementById('qstextarea').value = v;
                         });
                     },
                 },
             });
-
-            // get json
-            //const content = editor.get();
         </script>
     </body>
 </html>
