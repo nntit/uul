@@ -88,9 +88,10 @@ module.exports = (App, url, endpoint, options) => {
         res.writeHeader('Access-Control-Allow-Origin', '*');
         typeInfo = req.getHeader('content-type');
         var context = {};
-        context.res = res;
-        context.req = req;
         context.schema = optionDefault.schema;
+        if (token = getCookie(req, "token") || req.getHeader("token") || req.getHeader("authorization")) {
+            context.token = token;
+        }
         getBody(res, (correct, data) => {
             JSONdata = correct ? tryParseJSON(data) : 'error parse json';
             if (correct && typeInfo == 'application/json' && JSONdata) {
