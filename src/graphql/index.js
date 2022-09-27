@@ -90,6 +90,7 @@ module.exports = (App, url, endpoint, options) => {
         var context = {};
         context.res = res;
         context.req = req;
+        context.schema = optionDefault.schema;
         getBody(res, (correct, data) => {
             JSONdata = correct ? tryParseJSON(data) : 'error parse json';
             if (correct && typeInfo == 'application/json' && JSONdata) {
