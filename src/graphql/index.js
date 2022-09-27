@@ -7,6 +7,7 @@ const { mergeTypeDefs, mergeResolvers } = require('@graphql-tools/merge');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
 
 const getBody = require('../getBody');
+const getCookie = require('../getCookie');
 
 const depthLimitQuery = require('./libs/depthLimitQuery');
 const disableIntrospection = require('./libs/disableIntrospection');
