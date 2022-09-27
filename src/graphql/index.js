@@ -89,6 +89,7 @@ module.exports = (App, url, endpoint, options) => {
         res.writeHeader('Access-Control-Allow-Origin', '*');
         typeInfo = req.getHeader('content-type');
         var context = {};
+        context.res = res;
         context.schema = optionDefault.schema;
         if (token = getCookie(req, "token") || req.getHeader("token") || req.getHeader("authorization")) {
             context.token = token;
