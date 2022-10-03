@@ -5,7 +5,7 @@ const { selects } = require('../libs/selectGraphql');
 const resolvers = {
     Query: {
         Groups: async (parent, args, context) => {
-            return selects(model, parent, args, context);
+            return selects(model, args);
         },
     },
     Mutation: {

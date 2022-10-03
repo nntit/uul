@@ -5,7 +5,7 @@ const { selects } = require('../libs/selectGraphql');
 const resolvers = {
     Query: {
         Users: async (parent, args, context) => {
-            return selects(model, parent, args, context);
+            return selects(model, args);
         },
         User: async (parent, args, context) => {
             var data = await model.findOne(args).lean();

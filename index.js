@@ -8,4 +8,5 @@ module.exports = {
     staticFiles: require('./src/staticFiles'),
     redirects: require('./src/redirects'),
     setCookie: require('./src/setCookie'),
+    upload: require('./src/upload'),
 };

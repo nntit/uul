@@ -6,7 +6,7 @@ const uws = uul.uws;
 const App = uws.App({});
 
 async function mongo() {
-    await mongoose.connect("mongodb+srv://test:test@cluster0.8uf2s.mongodb.net/?retryWrites=true&w=majority");
+    await mongoose.connect('mongodb+srv://test:test@cluster0.8uf2s.mongodb.net/?retryWrites=true&w=majority');
 }
 mongo().catch((err) => console.log(err));
 
@@ -18,7 +18,7 @@ uul.graphql(App, '/graphql', '/graphql', {
     depthLimit: 10,
     production: false,
 });
-
+uul.upload(App, '/upload', __dirname + '/upload');
 App.get('/*', (res, req) => {
     const uuid = crypto.randomUUID({ disableEntropyCache: true });
     res.writeHeader('Set-Cookie', '_token=' + uuid + '; SameSite=Strict; HttpOnly');
