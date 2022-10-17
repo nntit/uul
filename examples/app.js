@@ -6,7 +6,7 @@ const uws = uul.uws;
 const App = uws.App({});
 
 async function mongo() {
-    await mongoose.connect('mongodb+srv://test:test@cluster0.8uf2s.mongodb.net/?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://test@cluster0.8uf2s.mongodb.net/?retryWrites=true&w=majority');
 }
 mongo().catch((err) => console.log(err));
 
